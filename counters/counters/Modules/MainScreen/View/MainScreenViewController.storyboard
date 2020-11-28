@@ -10,13 +10,30 @@
         <!--Main Screen View Controller-->
         <scene sceneID="Woi-xg-SsT">
             <objects>
-                <viewController storyboardIdentifier="MainScreen" id="aXT-q3-vJ5" customClass="MainScreenViewController" customModule="counters" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainScreenViewController" id="aXT-q3-vJ5" customClass="MainScreenViewController" customModule="counters" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LOj-4d-TPp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOf-yg-jwv">
+                                <rect key="frame" x="0.0" y="782" width="414" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="YTr-4Q-hP6"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="pOf-yg-jwv" firstAttribute="leading" secondItem="ExW-7m-hEz" secondAttribute="leading" id="RbU-P8-HOl"/>
+                            <constraint firstItem="pOf-yg-jwv" firstAttribute="trailing" secondItem="ExW-7m-hEz" secondAttribute="trailing" id="YLi-Zf-hMK"/>
+                            <constraint firstItem="ExW-7m-hEz" firstAttribute="bottom" secondItem="pOf-yg-jwv" secondAttribute="bottom" id="fd3-Am-IXu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ExW-7m-hEz"/>
                     </view>
+                    <connections>
+                        <outlet property="toolBar" destination="pOf-yg-jwv" id="Rbu-1j-00c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mho-xc-HEw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

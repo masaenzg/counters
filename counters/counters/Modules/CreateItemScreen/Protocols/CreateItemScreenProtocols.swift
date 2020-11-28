@@ -14,6 +14,8 @@ protocol CreateItemScreenPresenterProtocol: AnyObject {
     var view: CreateItemScreenViewProtocol? { get set }
     var router: CreateItemScreenRouterProtocol? { get set }
     var interactor: CreateItemScreenInteractorProtocol? { get set }
+    
+    func sendToCloseComponent()
 }
 
 protocol CreateItemScreenInteractorOutputProtocol: AnyObject {
@@ -23,6 +25,7 @@ protocol CreateItemScreenRouterProtocol: AnyObject {
     var viewController: BaseViewController? { get set }
     
     static func createCreateItemScreenModule() -> CreateItemScreenViewController?
+    func closeComponent()
 }
 
 protocol CreateItemScreenViewProtocol: AnyObject {

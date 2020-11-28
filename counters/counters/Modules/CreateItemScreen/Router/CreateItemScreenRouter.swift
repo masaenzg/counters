@@ -30,5 +30,10 @@ final class CreateItemScreenRouter: CreateItemScreenRouterProtocol {
         ref.presenter = presenter
         return ref
     }
+    
+    func closeComponent() {
+        viewController?.navigationController?.navigationBar.prefersLargeTitles = true
+        viewController?.navigationController?.popViewController(animated: true)
+    }
 }
 

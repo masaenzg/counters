@@ -9,7 +9,7 @@
 import Foundation
 
 enum Storyboards: String {
-    case welcomeScreen = "WelcomeScreen"
-    case mainScreen = "MainScreen"
-    case createItemScreen = "CreateItemScreen"
+    case welcomeScreen = "WelcomeScreenViewController"
+    case mainScreen = "MainScreenViewController"
+    case createItemScreen = "CreateItemScreenViewController"
 }

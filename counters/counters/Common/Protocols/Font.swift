@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  Font.swift
 //  counters
 //
 //  Created by Manuel Adolfo Saenz Grijalba on 28/11/20.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, Storyboarded {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+protocol Font {
+    var regular: String { get }
+    var semiBold: String { get }
+    var heavy: String { get }
+    var bold: String { get }
 }

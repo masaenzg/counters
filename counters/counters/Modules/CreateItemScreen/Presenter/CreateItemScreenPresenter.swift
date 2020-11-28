@@ -11,6 +11,10 @@ final class CreateItemScreenPresenter: CreateItemScreenPresenterProtocol {
     weak var view: CreateItemScreenViewProtocol?
     var router: CreateItemScreenRouterProtocol?
     var interactor: CreateItemScreenInteractorProtocol?
+    
+    func sendToCloseComponent() {
+        router?.closeComponent()
+    }
 }
 
 extension CreateItemScreenPresenter: CreateItemScreenInteractorOutputProtocol {}

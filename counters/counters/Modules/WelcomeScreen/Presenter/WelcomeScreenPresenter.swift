@@ -11,6 +11,10 @@ final class WelcomeScreenPresenter: WelcomeScreenPresenterProtocol {
     weak var view: WelcomeScreenViewProtocol?
     var router: WelcomeScreenRouterProtocol?
     var interactor: WelcomeScreenInteractorProtocol?
+    
+    func sendToMainScreen() {
+        router?.presentMainScreen()
+    }
 }
 
 extension WelcomeScreenPresenter: WelcomeScreenInteractorOutputProtocol {}
