@@ -15,15 +15,18 @@ protocol WelcomeScreenPresenterProtocol: AnyObject {
     var view: WelcomeScreenViewProtocol? { get set }
     var router: WelcomeScreenRouterProtocol? { get set }
     var interactor: WelcomeScreenInteractorProtocol? { get set }
+    
+    func sendToMainScreen()
 }
 
 protocol WelcomeScreenInteractorOutputProtocol: AnyObject {
 }
 
 protocol WelcomeScreenRouterProtocol: AnyObject {
-    var viewController: BaseViewController? { get set }
+    var viewController: UIViewController? { get set }
     
     static func createWelcomeScreenModule() -> WelcomeScreenViewController?
+    func presentMainScreen()
 }
 
 protocol WelcomeScreenViewProtocol: AnyObject {

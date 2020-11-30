@@ -30,5 +30,10 @@ final class MainScreenRouter: MainScreenRouterProtocol {
         ref.presenter = presenter
         return ref
     }
+    
+    func presentCreateItem() {
+        guard let createItemScreen = CreateItemScreenRouter.createCreateItemScreenModule() else { return }
+        viewController?.navigationController?.pushViewController(createItemScreen, animated: true)
+    }
 }
 

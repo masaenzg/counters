@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  UIView+Extension.swift
 //  counters
 //
 //  Created by Manuel Adolfo Saenz Grijalba on 28/11/20.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class BaseViewController: UIViewController, Storyboarded {
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension UIView {
+    class var viewID: String {
+        return "\(self)"
     }
 }

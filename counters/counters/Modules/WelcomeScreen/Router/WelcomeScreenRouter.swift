@@ -9,8 +9,7 @@
 import UIKit
 
 final class WelcomeScreenRouter: WelcomeScreenRouterProtocol {
-    
-    weak var viewController: BaseViewController?
+    weak var viewController: UIViewController?
     
     static func createWelcomeScreenModule() -> WelcomeScreenViewController? {
         guard let ref = WelcomeScreenViewController.instantiate(from: .welcomeScreen) else { return nil } 
@@ -29,6 +28,12 @@ final class WelcomeScreenRouter: WelcomeScreenRouterProtocol {
         
         ref.presenter = presenter
         return ref
+    }
+    
+    func presentMainScreen() {
+        guard let mainScreen = MainScreenRouter.createMainScreenModule() else { return }
+        viewController?.navigationController?.navigationBar.isHidden = false
+        viewController?.navigationController?.pushViewController(mainScreen, animated: true)
     }
 }
 

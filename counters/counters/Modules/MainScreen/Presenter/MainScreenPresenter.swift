@@ -12,7 +12,9 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     var router: MainScreenRouterProtocol?
     var interactor: MainScreenInteractorProtocol?
     
-    func viewDidLoad() {}
+    func sendToCreateItem() {
+        router?.presentCreateItem()
+    }
 }
 
 extension MainScreenPresenter: MainScreenInteractorOutputProtocol {}

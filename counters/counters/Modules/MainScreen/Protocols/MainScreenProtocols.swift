@@ -14,6 +14,8 @@ protocol MainScreenPresenterProtocol: AnyObject {
     var view: MainScreenViewProtocol? { get set }
     var router: MainScreenRouterProtocol? { get set }
     var interactor: MainScreenInteractorProtocol? { get set }
+    
+    func sendToCreateItem()
 }
 
 protocol MainScreenInteractorOutputProtocol: AnyObject {
@@ -23,6 +25,8 @@ protocol MainScreenRouterProtocol: AnyObject {
     var viewController: BaseViewController? { get set }
     
     static func createMainScreenModule() -> MainScreenViewController?
+    
+    func presentCreateItem()
 }
 
 protocol MainScreenViewProtocol: AnyObject {
