@@ -24,6 +24,7 @@ extension UIColor {
         static let mediumGray = UIColor.fromHex(rgbValue: 0xEDEDED)
         static let lightGray = UIColor.fromHex(rgbValue: 0xC7C7CC)
         static let darkSilver = UIColor.fromHex(rgbValue: 0x888B90)
+        static let lightSilver = UIColor.fromHex(rgbValue: 0xC4C4C4)
         static let silver = UIColor.fromHex(rgbValue: 0xDCDCDF)
         static let mediumBlack = UIColor.fromHex(rgbValue: 0x2B2B2B)
         static let lightBlack = UIColor.fromHex(rgbValue: 0x4A4A4A)

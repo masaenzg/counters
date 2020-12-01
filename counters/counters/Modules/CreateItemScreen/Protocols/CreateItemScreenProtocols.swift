@@ -8,6 +8,7 @@
 
 protocol CreateItemScreenInteractorProtocol: AnyObject {
     var presenter: CreateItemScreenInteractorOutputProtocol? { get set }
+    func createItem(itemName: String)
 }
 
 protocol CreateItemScreenPresenterProtocol: AnyObject {
@@ -15,10 +16,13 @@ protocol CreateItemScreenPresenterProtocol: AnyObject {
     var router: CreateItemScreenRouterProtocol? { get set }
     var interactor: CreateItemScreenInteractorProtocol? { get set }
     
+    func saveItem(with text: String?)
     func sendToCloseComponent()
 }
 
 protocol CreateItemScreenInteractorOutputProtocol: AnyObject {
+    func createItemSuccess()
+    func createItemFailed(error: Error)
 }
 
 protocol CreateItemScreenRouterProtocol: AnyObject {

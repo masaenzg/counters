@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MainScreenTableViewCell" customModule="counters" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="142"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="142"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="It8-P0-aej">
+                        <rect key="frame" x="12" y="16" width="349" height="126"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZS-B0-skf">
+                                <rect key="frame" x="71" y="16" width="268" height="55"/>
+                                <string key="text">Number of times I’ve forgotten my mother’s name because I was high on Frugelés.Number of times I’ve forgotten my mother’s name because I was high on Frugelés.Number of times I’ve forgotten my mother’s name because I was high on Frugelés.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="WDR-QI-NXZ">
+                                <rect key="frame" x="241" y="80" width="94" height="32"/>
+                            </stepper>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PwG-dv-gxw">
+                                <rect key="frame" x="59" y="0.0" width="2" height="126"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="2" id="WMG-Qc-Rwq"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-Ih-vxa">
+                                <rect key="frame" x="2" y="15" width="47" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="G9U-Ih-vxa" firstAttribute="leading" secondItem="It8-P0-aej" secondAttribute="leading" constant="2" id="0a1-ox-caI"/>
+                            <constraint firstAttribute="trailing" secondItem="oZS-B0-skf" secondAttribute="trailing" constant="10" id="1B1-g9-t3G"/>
+                            <constraint firstAttribute="bottom" secondItem="WDR-QI-NXZ" secondAttribute="bottom" constant="14" id="2Cz-eQ-LM7"/>
+                            <constraint firstItem="WDR-QI-NXZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="oZS-B0-skf" secondAttribute="bottom" constant="9" id="4Z5-22-d1Y"/>
+                            <constraint firstAttribute="bottom" secondItem="PwG-dv-gxw" secondAttribute="bottom" id="HQV-3Q-Kkz"/>
+                            <constraint firstItem="oZS-B0-skf" firstAttribute="top" secondItem="It8-P0-aej" secondAttribute="top" constant="16" id="M2o-G7-4XT"/>
+                            <constraint firstItem="oZS-B0-skf" firstAttribute="leading" secondItem="PwG-dv-gxw" secondAttribute="trailing" constant="10" id="bbm-vT-YjE"/>
+                            <constraint firstItem="PwG-dv-gxw" firstAttribute="leading" secondItem="G9U-Ih-vxa" secondAttribute="trailing" constant="10" id="muc-gy-r1T"/>
+                            <constraint firstItem="G9U-Ih-vxa" firstAttribute="top" secondItem="It8-P0-aej" secondAttribute="top" constant="15" id="mvM-nt-CtK"/>
+                            <constraint firstAttribute="trailing" secondItem="WDR-QI-NXZ" secondAttribute="trailing" constant="14" id="nKN-Yj-ece"/>
+                            <constraint firstItem="PwG-dv-gxw" firstAttribute="leading" secondItem="It8-P0-aej" secondAttribute="leading" constant="59" id="sk2-aM-PbF"/>
+                            <constraint firstItem="PwG-dv-gxw" firstAttribute="top" secondItem="It8-P0-aej" secondAttribute="top" id="uuB-hV-wfP"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="It8-P0-aej" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="ViQ-14-94y"/>
+                    <constraint firstAttribute="trailing" secondItem="It8-P0-aej" secondAttribute="trailing" constant="12" id="Xme-db-QGZ"/>
+                    <constraint firstItem="It8-P0-aej" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="ZLP-Ve-A9i"/>
+                    <constraint firstAttribute="bottom" secondItem="It8-P0-aej" secondAttribute="bottom" id="gEX-VR-tT0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="containerView" destination="It8-P0-aej" id="pNU-gj-xUa"/>
+                <outlet property="counterLabel" destination="G9U-Ih-vxa" id="afN-os-7lB"/>
+                <outlet property="counterTitleLabel" destination="oZS-B0-skf" id="Tkk-qM-zn0"/>
+                <outlet property="separatorView" destination="PwG-dv-gxw" id="ybR-zF-b6Z"/>
+                <outlet property="stepper" destination="WDR-QI-NXZ" id="ahZ-J3-QmW"/>
+            </connections>
+            <point key="canvasLocation" x="177.536231884058" y="186.16071428571428"/>
+        </tableViewCell>
+    </objects>
+</document>
