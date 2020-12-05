@@ -11,10 +11,12 @@ import UIKit
 enum UIBarButtonState {
     case enabled
     case disbaled
+    case boldEnabled
     
     var tintColor: UIColor {
         switch self {
-        case .enabled:
+        case .enabled,
+             .boldEnabled:
             return ThemeManager.shared.theme.enabledColor
         default:
             return ThemeManager.shared.theme.disabledColor
@@ -32,7 +34,8 @@ enum UIBarButtonState {
     
     var state: UIControl.State {
         switch self {
-        case .enabled:
+        case .enabled,
+             .boldEnabled:
             return .normal
         default:
             return .disabled

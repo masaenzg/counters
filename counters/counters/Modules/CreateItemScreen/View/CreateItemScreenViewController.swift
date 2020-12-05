@@ -41,13 +41,19 @@ final class CreateItemScreenViewController: BaseViewController {
     
     private func setupNavigationRightButton() {
         let barButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
-        barButton.setup(state: .enabled)
-        //barButton.setup(state: .disbaled)
-        //barButton.isEnabled = false
+        barButton.setup(state: .disbaled)
+        barButton.isEnabled = false
         navigationItem.rightBarButtonItem = barButton
     }
     
+    private func changeSaveButtonState(isEnabled: Bool) {
+        guard let button = navigationItem.rightBarButtonItem else { return }
+        button.isEnabled = isEnabled
+        button.setup(state: isEnabled ? .boldEnabled : .disbaled)
+    }
+    
     private func setupTextfield() {
+        textField.delegate = self
         textField.tintColor = ThemeManager.shared.theme.tintColor
         textField.rightView = createLoader()
         showLoader(isVisible: false)
@@ -73,8 +79,26 @@ final class CreateItemScreenViewController: BaseViewController {
     @objc
     func saveTapped() {
         showLoader(isVisible: true)
+        presenter?.saveItem(with: textField.text)
     }
 }
 
 extension CreateItemScreenViewController: CreateItemScreenViewProtocol {}
 
+extension CreateItemScreenViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        changeSaveButtonState(isEnabled: (text.count > 5))
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+       guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        changeSaveButtonState(isEnabled: (count >= 5))
+        return true
+    }
+}

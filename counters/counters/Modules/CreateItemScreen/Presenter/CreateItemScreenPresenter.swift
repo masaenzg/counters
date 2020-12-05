@@ -12,9 +12,22 @@ final class CreateItemScreenPresenter: CreateItemScreenPresenterProtocol {
     var router: CreateItemScreenRouterProtocol?
     var interactor: CreateItemScreenInteractorProtocol?
     
+    func saveItem(with text: String?) {
+        guard let text = text else { return }
+        interactor?.createItem(itemName: text)
+    }
+    
     func sendToCloseComponent() {
         router?.closeComponent()
     }
 }
 
-extension CreateItemScreenPresenter: CreateItemScreenInteractorOutputProtocol {}
+extension CreateItemScreenPresenter: CreateItemScreenInteractorOutputProtocol {
+    func createItemSuccess() {
+        router?.closeComponent()
+    }
+    
+    func createItemFailed(error: Error) {
+        
+    }
+}
