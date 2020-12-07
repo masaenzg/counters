@@ -27,15 +27,16 @@ protocol MainScreenPresenterProtocol: AnyObject {
     func addCounter(with index: Int)
     func removeCounter(with index: Int)
     func deleteCounters()
+    func sendToActionSheet()
 }
 
 protocol MainScreenInteractorOutputProtocol: AnyObject {
     func getItemsSuccess(items: [CounterBody])
-    func getItemsError(error: Error)
+    func getItemsError()
     func updateCounterSuccess(items: [CounterBody], idCounter: String, indexPath: IndexPath)
-    func updateCounterError(error: Error)
-    func deleteCounterSuccess()
-    func deleteCounterError(error: Error)
+    func updateCounterError(isIncrement: Bool, idCounter: String, indexPath: IndexPath)
+    func deleteCounterSuccess(idCounter: String)
+    func deleteCounterError()
 }
 
 protocol MainScreenRouterProtocol: AnyObject {
@@ -44,6 +45,8 @@ protocol MainScreenRouterProtocol: AnyObject {
     static func createMainScreenModule() -> MainScreenViewController?
     
     func presentCreateItem()
+    func presentActionSheet(with text: String, completion: (() -> Void)?)
+    func presentAlert(with model: AlertActionModel)
 }
 
 protocol MainScreenViewProtocol: AnyObject {
@@ -52,4 +55,5 @@ protocol MainScreenViewProtocol: AnyObject {
     func updateView()
     func updateCounter(with indexPath: IndexPath)
     func finishEditing()
+    func showAlerCustomView(with model: AlertCustomViewModel)
 }

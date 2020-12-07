@@ -24,7 +24,7 @@ final class CreateItemScreenViewController: BaseViewController {
     
     private func setupNavigationBar() {
         setupNavigationButtons()
-        navigationItem.title = "Create a Counter"
+        navigationItem.title = AppStrings.CreateItemScreen.title
     }
     
     private func setupNavigationButtons() {

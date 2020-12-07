@@ -10,6 +10,10 @@ import UIKit
 
 
 extension String {
+    var localizable: String {
+        NSLocalizedString(self, comment: "COUNTERS TEXT")
+    }
+    
     func loadFont(size: FontSize) -> UIFont {
         guard let font = UIFont(name: self, size: size.rawValue) else {
             return UIFont.systemFont(ofSize: size.rawValue)

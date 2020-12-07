@@ -26,8 +26,8 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
                                     switch result {
                                     case .success(let response):
                                         self?.presenter?.getItemsSuccess(items: response)
-                                    case .failure(let error):
-                                        self?.presenter?.getItemsError(error: error)
+                                    case .failure(_):
+                                        self?.presenter?.getItemsError()
                                     }
                                     
         })
@@ -45,9 +45,10 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
                                 completion: { [weak self] (result) in
                                     switch result {
                                     case .success(let response):
-                                        self?.presenter?.updateCounterSuccess(items: response, idCounter: idCounter, indexPath: indexPath)
-                                    case .failure(let error):
-                                        self?.presenter?.updateCounterError(error: error)
+                                        //self?.presenter?.updateCounterSuccess(items: response, idCounter: idCounter, indexPath: indexPath)
+                                        self?.presenter?.updateCounterError(isIncrement: isIncrement, idCounter: idCounter, indexPath: indexPath)
+                                    case .failure(_):
+                                        self?.presenter?.updateCounterError(isIncrement: isIncrement, idCounter: idCounter, indexPath: indexPath)
                                     }
                                     
         })
@@ -64,9 +65,9 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
                                 completion: { [weak self] (result) in
                                     switch result {
                                     case .success(_):
-                                        self?.presenter?.deleteCounterSuccess()
-                                    case .failure(let error):
-                                        self?.presenter?.deleteCounterError(error: error)
+                                        self?.presenter?.deleteCounterSuccess(idCounter: idCounter)
+                                    case .failure(_):
+                                        self?.presenter?.deleteCounterError()
                                     }
                                     
         })

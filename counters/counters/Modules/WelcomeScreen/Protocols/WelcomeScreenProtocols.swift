@@ -16,6 +16,8 @@ protocol WelcomeScreenPresenterProtocol: AnyObject {
     var router: WelcomeScreenRouterProtocol? { get set }
     var interactor: WelcomeScreenInteractorProtocol? { get set }
     
+    func getNumberOfRows() -> Int
+    func getCounterRow(index: Int) -> WelcomeScreenCellModel
     func sendToMainScreen()
 }
 

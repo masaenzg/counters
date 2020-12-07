@@ -12,6 +12,9 @@ struct MainTheme: Theme {
     var backgroundColor: UIColor = UIColor.white
     var secondaryBackgroundColor: UIColor = UIColor.Pallete.mediumGray
     var tintColor: UIColor = UIColor.Pallete.orange
+    var titleColor: UIColor = UIColor.black
+    var subtitleColor: UIColor = UIColor.Pallete.lightBlack
+    var contentColor: UIColor = UIColor.Pallete.darkSilver
     var disabledColor: UIColor = UIColor.Pallete.lightGray
     var enabledColor: UIColor = UIColor.Pallete.orange
     var hasValueColor: UIColor = UIColor.Pallete.orange
