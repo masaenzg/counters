@@ -22,17 +22,6 @@ class CounterAPI: CounterAPIProtocol {
         task.resume()
     }
     
-    func request<T>(serviceResponse: Response<T>, route: EndPoint, group: DispatchGroup, completion: @escaping (Error?) -> Void) {
-        if !Reachability.isConnectedToNetwork() {
-            completion(ErrorAPI.internetConnectionFailed)
-        }
-        let request = setupRequest(with: route)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            group.leave()
-        }
-        task.resume()
-    }
-    
     private func setupRequest(with route: EndPoint) -> URLRequest {
         let url = route.baseUrl.appendingPathComponent(route.path)
         var urlRequest = URLRequest(url: url)
@@ -46,7 +35,7 @@ class CounterAPI: CounterAPIProtocol {
         completion(
             Result {
                 guard let data = data else {
-                    throw ErrorAPI.notDataFount
+                    throw ErrorAPI.notDataFound
                 }
                 if let dataParsed = try? response.content(data) {
                     return dataParsed

@@ -10,6 +10,6 @@ import Foundation
 
 enum ErrorAPI: Error {
     case internetConnectionFailed
-    case notDataFount
+    case notDataFound
     case unableParse
 }

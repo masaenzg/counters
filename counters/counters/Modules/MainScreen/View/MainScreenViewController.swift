@@ -13,6 +13,8 @@ final class MainScreenViewController: BaseViewController {
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var alertCustomView: AlertCustomView!
+    @IBOutlet weak var searchResultLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var presenter: MainScreenPresenterProtocol?
     var isInfoLoaded: Bool = false {
         didSet {
@@ -42,6 +44,7 @@ final class MainScreenViewController: BaseViewController {
         setupNavigationBar()
         setupTableView()
         setupToolBar()
+        setupLabel()
     }
     
     private func setupNavigationBar() {
@@ -89,6 +92,13 @@ final class MainScreenViewController: BaseViewController {
         toolBar.items = [emptyToolBarButton, toolBarButton]
     }
     
+    private func setupLabel() {
+        searchResultLabel.font = ThemeManager.shared.theme.appFont.regular.loadFont(size: .counterValue)
+        searchResultLabel.textColor = ThemeManager.shared.theme.contentColor
+        searchResultLabel.text = AppStrings.MainScreen.notResultsFound
+        searchResultLabel.isHidden = true
+    }
+    
     private func setupNavigationBarForEditMode() {
         setupNavigationDoneButton()
         setupNavigationSelectAllButton()
@@ -101,7 +111,7 @@ final class MainScreenViewController: BaseViewController {
     }
     
     private func setupNavigationSelectAllButton() {
-        let barButton = UIBarButtonItem(title: AppStrings.MainScreen.selectAllButtontext, style: .plain, target: self, action: #selector(editTapped))
+        let barButton = UIBarButtonItem(title: AppStrings.MainScreen.selectAllButtontext, style: .plain, target: self, action: #selector(selectAllTapped))
         barButton.setup(state: .enabled)
         navigationItem.rightBarButtonItem = barButton
     }
@@ -152,11 +162,21 @@ final class MainScreenViewController: BaseViewController {
     func deleteTapped() {
         presenter?.sendToActionSheet()
     }
+    
+    @objc
+    func selectAllTapped() {
+        let allRows = tableView.numberOfRows(inSection: .zero)
+        for row in 0..<allRows {
+            presenter?.addCounter(with: row)
+            tableView.selectRow(at: NSIndexPath(row: row, section: .zero) as IndexPath,
+                                           animated: false,
+                                           scrollPosition: UITableView.ScrollPosition.none)
+        }
+    }
 }
 
 extension MainScreenViewController: MainScreenViewProtocol {
     func updateView() {
-        isInfoLoaded = true
         tableView.reloadData()
     }
     
@@ -169,15 +189,30 @@ extension MainScreenViewController: MainScreenViewProtocol {
     }
     
     func showAlerCustomView(with model: AlertCustomViewModel) {
-        isInfoLoaded = false
         alertCustomView.setupData(with: model)
+    }
+    
+    func loadedInfo(with isLoaded: Bool) {
+        isInfoLoaded = isLoaded
+    }
+    
+    func resultLabelStatus(with isVivible: Bool) {
+        searchResultLabel.isHidden = !isVivible
+    }
+    
+    func startActivity() {
+        activityIndicator.startAnimating()
+    }
+    
+    func stopActivity() {
+        activityIndicator.stopAnimating()
     }
 }
 
 extension MainScreenViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        print(text)
+        presenter?.searchCounter(with: text)
     }
 }
 

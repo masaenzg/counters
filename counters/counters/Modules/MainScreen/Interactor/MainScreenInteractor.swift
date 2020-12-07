@@ -45,8 +45,7 @@ final class MainScreenInteractor: MainScreenInteractorProtocol {
                                 completion: { [weak self] (result) in
                                     switch result {
                                     case .success(let response):
-                                        //self?.presenter?.updateCounterSuccess(items: response, idCounter: idCounter, indexPath: indexPath)
-                                        self?.presenter?.updateCounterError(isIncrement: isIncrement, idCounter: idCounter, indexPath: indexPath)
+                                        self?.presenter?.updateCounterSuccess(items: response, idCounter: idCounter, indexPath: indexPath)
                                     case .failure(_):
                                         self?.presenter?.updateCounterError(isIncrement: isIncrement, idCounter: idCounter, indexPath: indexPath)
                                     }

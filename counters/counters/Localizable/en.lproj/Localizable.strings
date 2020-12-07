@@ -42,6 +42,7 @@
 "MainScreen.cancelActionSheetText" = "Cancel";
 "MainScreen.counters" = "Counters";
 "MainScreen.counter" = "Counter";
+"MainScreen.notResultsFound" = "No Results";
 
 //CreateItemScreen
 "CreateItemScreen.title" = "Create a counter";
