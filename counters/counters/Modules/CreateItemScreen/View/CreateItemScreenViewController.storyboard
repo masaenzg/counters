@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Item Screen View Controller-->
+        <scene sceneID="dgR-sQ-nzk">
+            <objects>
+                <viewController storyboardIdentifier="CreateItemScreenViewController" id="xyf-T0-yZJ" customClass="CreateItemScreenViewController" customModule="counters" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gtb-VM-eq5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hUQ-o5-hcS" customClass="TextField" customModule="counters" customModuleProvider="target">
+                                <rect key="frame" x="12" y="70" width="390" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="2Ms-MR-g4X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gbx-aa-7MQ" firstAttribute="trailing" secondItem="hUQ-o5-hcS" secondAttribute="trailing" constant="12" id="Ltx-q6-ORe"/>
+                            <constraint firstItem="hUQ-o5-hcS" firstAttribute="top" secondItem="gbx-aa-7MQ" secondAttribute="top" constant="26" id="Rcz-dZ-RVC"/>
+                            <constraint firstItem="hUQ-o5-hcS" firstAttribute="leading" secondItem="gbx-aa-7MQ" secondAttribute="leading" constant="12" id="mCk-JG-8NA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gbx-aa-7MQ"/>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="hUQ-o5-hcS" id="7PQ-Am-D4D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zaf-Ok-AsC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-59" y="62"/>
+        </scene>
+    </scenes>
+</document>

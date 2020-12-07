@@ -1,0 +1,48 @@
+/* 
+  Localizable.strings
+  Counters
+
+  Created by Manuel Adolfo Saenz Grijalba on 7/12/20.
+  Copyright © 2020 Manuel Adolfo Saenz Grijalba. All rights reserved.
+*/
+
+// Alerts
+"Alert.defaultBody" = "The Internet connection appears to be offline.";
+"Alerts.deleteErrorTitle" = "Couldn’t delete the counter “@”";
+"Alerts.deleteManyErrorTitle" = "Couldn’t delete some counters";
+"Alerts.createErrorTitle" = "Couldn’t create the counter";
+"Alerts.updateErrorTitle" = "Couldn’t update the “%@“ to %d";
+// Buttons
+"Alerts.dismissOption" = "Dismiss";
+"Alerts.retryOption" = "Dismiss";
+
+//WelcomeScreen
+"WelcomeScreen.titlePartOne" = "Welcome to\n";
+"WelcomeScreen.titlePartTwo" = "Counters";
+"WelcomeScreen.subtitle" = "An example app that syncs to a Node.js server running on your Mac.";
+"WelcomeScreen.addAnythingTitle" = "Add almost anything";
+"WelcomeScreen.addAnythingContent" = "Capture cups of lattes, frapuccinos, or anything else that can be counted.";
+"WelcomeScreen.counToSelfTitle" = "Count to self, or with anyone";
+"WelcomeScreen.counToSelfContent" = "Others can view or make changes. There’s no authentication API.";
+"WelcomeScreen.countYourTitle" = "Count your thoughts";
+"WelcomeScreen.countYourContent" = "Possibilities are literally endless.";
+"WelcomeScreen.buttonText" = "Continue";
+
+//MainScreen
+"MainScreen.title" = "Counters";
+"MainScreen.searchTitle" = "Search";
+"MainScreen.alertEmptyRowsTitle" = "No counters yet";
+"MainScreen.alertEmptyRowsContent" = "“When I started counting my blessings, my whole life turned around.”\n—Willie Nelson";
+"MainScreen.alertEmptyRowsButtonText" = "Create a counter";
+"MainScreen.alertLoadFailTitle" = "Couldn’t load the counters";
+"MainScreen.alertLoadFailContent" = "The Internet connection appears to be offline.";
+"MainScreen.alertLoadFailButtonText" = "Retry";
+"MainScreen.selectAllButtontext" = "Select All";
+"MainScreen.deleteActionSheetText" = "Delete %d %@";
+"MainScreen.cancelActionSheetText" = "Cancel";
+"MainScreen.counters" = "Counters";
+"MainScreen.counter" = "Counter";
+"MainScreen.notResultsFound" = "No Results";
+
+//CreateItemScreen
+"CreateItemScreen.title" = "Create a counter";
