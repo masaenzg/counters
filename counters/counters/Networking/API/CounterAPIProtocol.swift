@@ -10,5 +10,4 @@ import Foundation
 
 protocol CounterAPIProtocol {
     func request<T>(serviceResponse: Response<T>, route: EndPoint, completion: @escaping (Result<T,Error>) -> Void)
-    func request<T>(serviceResponse: Response<T>, route: EndPoint, group: DispatchGroup, completion: @escaping (Error?) -> Void)
 }

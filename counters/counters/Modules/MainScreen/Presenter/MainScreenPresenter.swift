@@ -15,8 +15,10 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     var counterList: [MainScreenCellModel] = []
     var counterListForDelete: [MainScreenCellModel] = []
     let dispatchGroup = DispatchGroup()
+    private var searchingWorkItem: DispatchWorkItem?
     
     func loadCounters() {
+        view?.startActivity()
         interactor?.getItems()
     }
     
@@ -60,6 +62,26 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
         router?.presentActionSheet(with: text, completion: { [weak self] in
             self?.deleteCounters()
         })
+    }
+    
+    func searchCounter(with text: String) {
+        searchingWorkItem?.cancel()
+        if text.isEmpty {
+            view?.resultLabelStatus(with: false)
+            loadCounters()
+        } else {
+            let currentWorkItem = DispatchWorkItem { [weak self] in
+                self?.filterCounter(with: text)
+            }
+            searchingWorkItem = currentWorkItem
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: currentWorkItem)
+        }
+    }
+    
+    private func filterCounter(with text: String) {
+        counterList = counterList.filter { $0.title.contains(text) }
+        view?.resultLabelStatus(with: counterList.count == .zero)
+        view?.updateView()
     }
     
     private func createViewModel(items: [CounterBody]) {
@@ -129,6 +151,7 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
                                          buttonTitle: AppStrings.MainScreen.alertEmptyRowsButtonText,
                                          closure: closure)
         view?.showAlerCustomView(with: model)
+        view?.loadedInfo(with: false)
     }
     
     private func setAlertForErrorList() {
@@ -145,15 +168,18 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
 
 extension MainScreenPresenter: MainScreenInteractorOutputProtocol {
     func getItemsSuccess(items: [CounterBody]) {
+        view?.stopActivity()
         if items.count == 0 {
             setAlertForEmptyRows()
         } else {
             createViewModel(items: items)
             view?.updateView()
+            view?.loadedInfo(with: true)
         }
     }
     
     func getItemsError() {
+        view?.stopActivity()
         setAlertForErrorList()
     }
     

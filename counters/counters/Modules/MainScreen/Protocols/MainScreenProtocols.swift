@@ -28,6 +28,7 @@ protocol MainScreenPresenterProtocol: AnyObject {
     func removeCounter(with index: Int)
     func deleteCounters()
     func sendToActionSheet()
+    func searchCounter(with text: String)
 }
 
 protocol MainScreenInteractorOutputProtocol: AnyObject {
@@ -56,4 +57,8 @@ protocol MainScreenViewProtocol: AnyObject {
     func updateCounter(with indexPath: IndexPath)
     func finishEditing()
     func showAlerCustomView(with model: AlertCustomViewModel)
+    func resultLabelStatus(with isVivible: Bool)
+    func loadedInfo(with isLoaded: Bool)
+    func startActivity()
+    func stopActivity()
 }

@@ -46,6 +46,7 @@ struct AppStrings {
         static var cancelActionSheetText: String { return "MainScreen.cancelActionSheetText".localizable }
         static var counters: String { return "MainScreen.counters".localizable }
         static var counter: String { return "MainScreen.counter".localizable }
+        static var notResultsFound: String { return "MainScreen.notResultsFound".localizable }
     }
     
     struct CreateItemScreen {
