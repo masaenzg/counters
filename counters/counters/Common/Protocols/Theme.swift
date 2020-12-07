@@ -12,6 +12,9 @@ protocol Theme {
     var backgroundColor: UIColor { get }
     var secondaryBackgroundColor: UIColor { get }
     var tintColor: UIColor { get }
+    var titleColor: UIColor { get }
+    var subtitleColor: UIColor { get }
+    var contentColor: UIColor { get }
     var disabledColor: UIColor { get }
     var enabledColor: UIColor { get }
     var hasValueColor: UIColor { get }

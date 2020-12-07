@@ -12,16 +12,30 @@ final class MainScreenViewController: BaseViewController {
     
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var alertCustomView: AlertCustomView!
     var presenter: MainScreenPresenterProtocol?
+    var isInfoLoaded: Bool = false {
+        didSet {
+            tableView.isHidden = !isInfoLoaded
+            alertCustomView.isHidden = isInfoLoaded
+            changeNavButtonState(isEnabled: isInfoLoaded)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         presenter?.loadCounters()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     private func setupUI() {
@@ -35,7 +49,7 @@ final class MainScreenViewController: BaseViewController {
         setupSearchBar()
         setupNavigationButton()
         navigationItem.rightBarButtonItem = nil
-        navigationItem.title = "Demo"
+        navigationItem.title = AppStrings.MainScreen.title
     }
     
     private func setupNavigationButton() {
@@ -49,7 +63,7 @@ final class MainScreenViewController: BaseViewController {
         search.searchResultsUpdater = self
         search.searchBar.tintColor = ThemeManager.shared.theme.tintColor
         search.obscuresBackgroundDuringPresentation = true
-        search.searchBar.placeholder = "Search"
+        search.searchBar.placeholder = AppStrings.MainScreen.searchTitle
         navigationItem.searchController = search
     }
     
@@ -87,7 +101,7 @@ final class MainScreenViewController: BaseViewController {
     }
     
     private func setupNavigationSelectAllButton() {
-        let barButton = UIBarButtonItem(title: "Select All", style: .plain, target: self, action: #selector(editTapped))
+        let barButton = UIBarButtonItem(title: AppStrings.MainScreen.selectAllButtontext, style: .plain, target: self, action: #selector(editTapped))
         barButton.setup(state: .enabled)
         navigationItem.rightBarButtonItem = barButton
     }
@@ -101,20 +115,14 @@ final class MainScreenViewController: BaseViewController {
         toolBar.items = [deleteBarButton, emptyToolBarButton, shareBarButton]
     }
     
-    private func setupActionSheet() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheet.view.tintColor = ThemeManager.shared.theme.tintColor
-        let deleteAction = UIAlertAction(title: "Borrar", style: .destructive) { [weak self] (_) in
-            self?.presenter?.deleteCounters()
-        }
-        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
-        actionSheet.addAction(deleteAction)
-        actionSheet.addAction(cancelAction)
-        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
     private func animate(with completion: @escaping () -> Void) {
         UIView.animate(withDuration: 0.3, animations: completion)
+    }
+    
+    private func changeNavButtonState(isEnabled: Bool) {
+        guard let button = navigationItem.leftBarButtonItem else { return }
+        button.isEnabled = isEnabled
+        button.setup(state: isEnabled ? .boldEnabled : .disbaled)
     }
     
     @objc
@@ -142,12 +150,13 @@ final class MainScreenViewController: BaseViewController {
     
     @objc
     func deleteTapped() {
-        setupActionSheet()
+        presenter?.sendToActionSheet()
     }
 }
 
 extension MainScreenViewController: MainScreenViewProtocol {
     func updateView() {
+        isInfoLoaded = true
         tableView.reloadData()
     }
     
@@ -157,6 +166,11 @@ extension MainScreenViewController: MainScreenViewProtocol {
 
     func finishEditing() {
         doneTapped()
+    }
+    
+    func showAlerCustomView(with model: AlertCustomViewModel) {
+        isInfoLoaded = false
+        alertCustomView.setupData(with: model)
     }
 }
 
@@ -183,10 +197,6 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

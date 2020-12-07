@@ -10,15 +10,33 @@ import UIKit
 
 class WelcomeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var contentlabel: UILabel!
+    @IBOutlet weak var imageContentView: UIView!
+    @IBOutlet weak var iconImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        setupUI()
     }
     
+    func setupInformation(with data: WelcomeScreenCellModel) {
+        titleLabel.text = data.title
+        contentlabel.text = data.content
+        imageContentView.backgroundColor = data.viewColor
+        iconImageView?.image = data.icon
+    }
+    
+    private func setupUI() {
+        self.selectionStyle = .none
+        imageContentView.layer.cornerRadius = 10
+        setupLabels()
+    }
+    
+    private func setupLabels() {
+        titleLabel.font = ThemeManager.shared.theme.appFont.semiBold.loadFont(size: .content)
+        contentlabel.font = ThemeManager.shared.theme.appFont.regular.loadFont(size: .content)
+        titleLabel.textColor = ThemeManager.shared.theme.cellTitleColor
+        contentlabel.textColor = ThemeManager.shared.theme.cellContentColor
+    }
 }

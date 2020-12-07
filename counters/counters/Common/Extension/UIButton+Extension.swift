@@ -20,9 +20,9 @@ extension UIButton {
         self.layer.cornerRadius = value
     }
     
-    func setupBigButton(with text: String) {
+    func setupButton(with text: String, cornerRadius: CGFloat = 10) {
         let backgroundColor = ThemeManager.shared.theme.enabledColor
-        setCornerRadius(with: 10)
+        setCornerRadius(with: cornerRadius)
         setBackground(with: backgroundColor, for: .normal)
         setBackground(with: backgroundColor, for: .highlighted)
         setTextForBigButton(with: text)

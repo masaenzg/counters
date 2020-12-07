@@ -12,6 +12,15 @@ final class WelcomeScreenPresenter: WelcomeScreenPresenterProtocol {
     var router: WelcomeScreenRouterProtocol?
     var interactor: WelcomeScreenInteractorProtocol?
     
+    func getNumberOfRows() -> Int {
+        return WelcomeScreenModel.getInformation().count
+    }
+    
+    func getCounterRow(index: Int) -> WelcomeScreenCellModel {
+        let arrayInformation = WelcomeScreenModel.getInformation()
+        return arrayInformation[index]
+    }
+    
     func sendToMainScreen() {
         router?.presentMainScreen()
     }

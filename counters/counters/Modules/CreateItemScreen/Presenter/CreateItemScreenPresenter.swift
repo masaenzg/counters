@@ -27,7 +27,10 @@ extension CreateItemScreenPresenter: CreateItemScreenInteractorOutputProtocol {
         router?.closeComponent()
     }
     
-    func createItemFailed(error: Error) {
-        
+    func createItemFailed() {
+        let model = AlertActionModel(title: AppStrings.Alerts.createErrorTitle,
+                                     message: AppStrings.Alerts.defaultBody,
+                                     leftActionText: AppStrings.Alerts.dismissOption)
+        router?.presentAlert(with: model)
     }
 }

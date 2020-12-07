@@ -12,4 +12,18 @@ class BaseViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    func showAlert(with model: AlertActionModel) {
+        let alert = UIAlertController(title: model.title, message: model.message, preferredStyle: .alert)
+        alert.view.tintColor = ThemeManager.shared.theme.tintColor
+        let leftAction = UIAlertAction(title: model.leftActionText, style: .cancel, handler: model.leftActionClosure)
+        alert.addAction(leftAction)
+        if let rightActionText = model.rightActionText {
+            let rightAction = UIAlertAction(title: rightActionText, style: .default, handler: { (_) in
+                alert.dismiss(animated: true, completion: nil)
+            })
+            alert.addAction(rightAction)
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
 }

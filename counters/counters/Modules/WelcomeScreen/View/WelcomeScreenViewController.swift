@@ -27,6 +27,7 @@ final class WelcomeScreenViewController: UIViewController, Storyboarded {
     }
     
     private func setupUI() {
+        self.view.backgroundColor = ThemeManager.shared.theme.backgroundColor
         setupLabels()
         setupTableView()
         setupButton()
@@ -38,14 +39,28 @@ final class WelcomeScreenViewController: UIViewController, Storyboarded {
     }
     
     private func setupTitlelabel() {
-        
+        let firstAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: ThemeManager.shared.theme.titleColor,
+                                                              .font: ThemeManager.shared.theme.appFont.heavy.loadFont(size: .header)]
+        let secondAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: ThemeManager.shared.theme.tintColor,
+                                                               .font: ThemeManager.shared.theme.appFont.heavy.loadFont(size: .header)]
+        let titlePartOne = NSMutableAttributedString(string: AppStrings.WelcomeScreen.titlePartOne,
+                                                     attributes: firstAttributes)
+        let titlePartTwo = NSAttributedString(string: AppStrings.WelcomeScreen.titlePartTwo,
+                                              attributes: secondAttributes)
+        titlePartOne.append(titlePartTwo)
+        titleLabel.attributedText = titlePartOne
     }
     
     private func setupSubtitleLabel() {
-        
+        subTitleLabel.text = AppStrings.WelcomeScreen.subtitle
+        subTitleLabel.font = ThemeManager.shared.theme.appFont.regular.loadFont(size: .content)
+        subTitleLabel.textColor = ThemeManager.shared.theme.subtitleColor
     }
     
     private func setupTableView() {
+        tableView.backgroundColor = ThemeManager.shared.theme.backgroundColor
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         registerCellForTableView()
@@ -56,7 +71,7 @@ final class WelcomeScreenViewController: UIViewController, Storyboarded {
     }
     
     private func setupButton() {
-        nextButton.setupBigButton(with: "Continue")
+        nextButton.setupButton(with: AppStrings.WelcomeScreen.buttonText)
     }
 }
 
@@ -64,18 +79,20 @@ extension WelcomeScreenViewController: WelcomeScreenViewProtocol {}
 
 extension WelcomeScreenViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return presenter?.getNumberOfRows() ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: WelcomeTableViewCell.viewID, for: indexPath) as? WelcomeTableViewCell else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: WelcomeTableViewCell.viewID, for: indexPath) as? WelcomeTableViewCell,
+            let data = presenter?.getCounterRow(index: indexPath.row) else {
+                return UITableViewCell()
         }
+        cell.setupInformation(with: data)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 87
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

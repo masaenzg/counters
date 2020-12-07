@@ -31,8 +31,11 @@ final class CreateItemScreenRouter: CreateItemScreenRouterProtocol {
         return ref
     }
     
+    func presentAlert(with model: AlertActionModel) {
+        viewController?.showAlert(with: model)
+    }
+    
     func closeComponent() {
-        viewController?.navigationController?.navigationBar.prefersLargeTitles = true
         viewController?.navigationController?.popViewController(animated: true)
     }
 }

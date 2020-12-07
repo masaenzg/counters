@@ -22,13 +22,14 @@ protocol CreateItemScreenPresenterProtocol: AnyObject {
 
 protocol CreateItemScreenInteractorOutputProtocol: AnyObject {
     func createItemSuccess()
-    func createItemFailed(error: Error)
+    func createItemFailed()
 }
 
 protocol CreateItemScreenRouterProtocol: AnyObject {
     var viewController: BaseViewController? { get set }
     
     static func createCreateItemScreenModule() -> CreateItemScreenViewController?
+    func presentAlert(with model: AlertActionModel)
     func closeComponent()
 }
 

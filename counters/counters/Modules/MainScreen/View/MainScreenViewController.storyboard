@@ -10,7 +10,7 @@
         <!--Main Screen View Controller-->
         <scene sceneID="Woi-xg-SsT">
             <objects>
-                <viewController storyboardIdentifier="MainScreenViewController" id="aXT-q3-vJ5" customClass="MainScreenViewController" customModule="counters" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainScreenViewController" id="aXT-q3-vJ5" customClass="MainScreenViewController" customModule="Counters" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LOj-4d-TPp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,10 +22,18 @@
                                 </constraints>
                                 <items/>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-RU-wKD">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ekk-RU-wKD">
                                 <rect key="frame" x="0.0" y="44" width="414" height="721"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m3M-UD-fEz" customClass="AlertCustomView" customModule="Counters" customModuleProvider="target">
+                                <rect key="frame" x="52" y="384" width="310" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="023-dv-vze"/>
+                                    <constraint firstAttribute="height" priority="750" constant="128" id="UvG-l6-rI2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -35,18 +43,23 @@
                             <constraint firstItem="Ekk-RU-wKD" firstAttribute="top" secondItem="ExW-7m-hEz" secondAttribute="top" id="Ukg-MT-Y9W"/>
                             <constraint firstItem="Ekk-RU-wKD" firstAttribute="leading" secondItem="ExW-7m-hEz" secondAttribute="leading" id="VIK-9A-izg"/>
                             <constraint firstItem="pOf-yg-jwv" firstAttribute="trailing" secondItem="ExW-7m-hEz" secondAttribute="trailing" id="YLi-Zf-hMK"/>
+                            <constraint firstItem="ExW-7m-hEz" firstAttribute="trailing" secondItem="m3M-UD-fEz" secondAttribute="trailing" constant="52" id="a2V-Db-Tpb"/>
+                            <constraint firstItem="m3M-UD-fEz" firstAttribute="leading" secondItem="ExW-7m-hEz" secondAttribute="leading" constant="52" id="efH-5k-Ra7"/>
                             <constraint firstItem="ExW-7m-hEz" firstAttribute="bottom" secondItem="pOf-yg-jwv" secondAttribute="bottom" id="fd3-Am-IXu"/>
+                            <constraint firstItem="m3M-UD-fEz" firstAttribute="centerY" secondItem="LOj-4d-TPp" secondAttribute="centerY" id="fk3-DO-mje"/>
+                            <constraint firstItem="m3M-UD-fEz" firstAttribute="centerX" secondItem="LOj-4d-TPp" secondAttribute="centerX" id="tMe-Jm-iMu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ExW-7m-hEz"/>
                     </view>
                     <connections>
+                        <outlet property="alertCustomView" destination="m3M-UD-fEz" id="qCn-Gc-sBX"/>
                         <outlet property="tableView" destination="Ekk-RU-wKD" id="Oos-Gg-a5X"/>
                         <outlet property="toolBar" destination="pOf-yg-jwv" id="Rbu-1j-00c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mho-xc-HEw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-145" y="102"/>
+            <point key="canvasLocation" x="-146.37681159420291" y="101.78571428571428"/>
         </scene>
     </scenes>
 </document>

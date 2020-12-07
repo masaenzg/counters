@@ -15,8 +15,6 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     var counterList: [MainScreenCellModel] = []
     var counterListForDelete: [MainScreenCellModel] = []
     let dispatchGroup = DispatchGroup()
-    var counterInternetError = 0
-    var counterDeleteError = 0
     
     func loadCounters() {
         interactor?.getItems()
@@ -52,9 +50,16 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.view?.finishEditing()
-            self.loadCounters()
+            self.handleDeleteResponse()
         }
+    }
+    
+    func sendToActionSheet() {
+        let counterText = counterListForDelete.count == 1 ? AppStrings.MainScreen.counter : AppStrings.MainScreen.counters
+        let text = String(format: AppStrings.MainScreen.deleteActionSheetText, counterListForDelete.count, counterText)
+        router?.presentActionSheet(with: text, completion: { [weak self] in
+            self?.deleteCounters()
+        })
     }
     
     private func createViewModel(items: [CounterBody]) {
@@ -70,16 +75,86 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
             strongSelf.counterList.append(cellModel)
         }
     }
+    
+    private func handleDeleteResponse() {
+        if counterListForDelete.isEmpty {
+            self.view?.finishEditing()
+            self.loadCounters()
+        } else if counterListForDelete.count == 1 {
+            setDeleteSingleCounterMessage()
+        } else {
+            sendToAlert(with: AppStrings.Alerts.deleteManyErrorTitle) { [weak self] (_) in
+                self?.counterListForDelete.removeAll()
+                self?.view?.finishEditing()
+                self?.loadCounters()
+            }
+        }
+    }
+    
+    private func updateDeleteCounters(with idCounter: String) {
+        guard let index = counterListForDelete.firstIndex(where: { $0.id == idCounter }) else { return }
+        removeCounter(with: index)
+    }
+    
+    private func setDeleteSingleCounterMessage() {
+        if counterListForDelete.indices.contains(.zero) {
+            let text = String(format: AppStrings.Alerts.deleteErrorTitle, counterListForDelete[.zero].title)
+            sendToAlert(with: text) { [weak self] (_) in
+                self?.counterListForDelete.removeAll()
+                self?.view?.finishEditing()
+                self?.loadCounters()
+            }
+        }
+    }
+    
+    private func sendToAlert(with text: String,
+                             rightButtonText: String? = nil,
+                             leftButtonText: String = AppStrings.Alerts.dismissOption,
+                             closure: ((UIAlertAction) -> Void)?) {
+        let model = AlertActionModel(title: text,
+                                     message: AppStrings.Alerts.defaultBody,
+                                     leftActionClosure: closure,
+                                     rightActionText: rightButtonText,
+                                     leftActionText: leftButtonText)
+        router?.presentAlert(with: model)
+    }
+    
+    
+    private func setAlertForEmptyRows() {
+        let closure: (() -> Void)? = { [weak self] in
+            self?.router?.presentCreateItem()
+        }
+        let model = AlertCustomViewModel(title: AppStrings.MainScreen.alertEmptyRowsTitle,
+                                         message: AppStrings.MainScreen.alertEmptyRowsContent,
+                                         buttonTitle: AppStrings.MainScreen.alertEmptyRowsButtonText,
+                                         closure: closure)
+        view?.showAlerCustomView(with: model)
+    }
+    
+    private func setAlertForErrorList() {
+        let closure: (() -> Void)? = { [weak self] in
+            self?.loadCounters()
+        }
+        let model = AlertCustomViewModel(title: AppStrings.MainScreen.alertLoadFailTitle,
+                                         message: AppStrings.MainScreen.alertLoadFailContent,
+                                         buttonTitle: AppStrings.MainScreen.alertLoadFailButtonText,
+                                         closure: closure)
+        view?.showAlerCustomView(with: model)
+    }
 }
 
 extension MainScreenPresenter: MainScreenInteractorOutputProtocol {
     func getItemsSuccess(items: [CounterBody]) {
-        createViewModel(items: items)
-        view?.updateView()
+        if items.count == 0 {
+            setAlertForEmptyRows()
+        } else {
+            createViewModel(items: items)
+            view?.updateView()
+        }
     }
     
-    func getItemsError(error: Error) {
-        
+    func getItemsError() {
+        setAlertForErrorList()
     }
     
     func updateCounterSuccess(items: [CounterBody], idCounter: String, indexPath: IndexPath) {
@@ -89,20 +164,24 @@ extension MainScreenPresenter: MainScreenInteractorOutputProtocol {
         view?.updateCounter(with: indexPath)
     }
     
-    func updateCounterError(error: Error) {
-        
-    }
-    
-    func deleteCounterSuccess() {
-        dispatchGroup.leave()
-    }
-    
-    func deleteCounterError(error: Error) {
-        if case ErrorAPI.internetConnectionFailed = error {
-            counterInternetError += 1
-        } else {
-            counterDeleteError += 1
+    func updateCounterError(isIncrement: Bool, idCounter: String, indexPath: IndexPath) {
+        guard let indexRow = counterList.firstIndex(where: { $0.id == idCounter }) else { return }
+        let row = counterList[indexRow]
+        let value = isIncrement ? (row.count + 1) : (row.count - 1)
+        let title = String(format: AppStrings.Alerts.updateErrorTitle, row.title, value)
+        sendToAlert(with: title,
+                    rightButtonText: AppStrings.Alerts.dismissOption,
+                    leftButtonText: AppStrings.Alerts.retryOption) { [weak self] (_) in
+                        self?.interactor?.updateCounter(isIncrement: isIncrement, idCounter: idCounter, indexPath: indexPath)
         }
+    }
+    
+    func deleteCounterSuccess(idCounter: String) {
+        dispatchGroup.leave()
+        updateDeleteCounters(with: idCounter)
+    }
+    
+    func deleteCounterError() {
         dispatchGroup.leave()
     }
 }

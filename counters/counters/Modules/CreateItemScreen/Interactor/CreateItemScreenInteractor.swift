@@ -28,8 +28,8 @@ final class CreateItemScreenInteractor: CreateItemScreenInteractorProtocol {
                                     switch result {
                                     case .success(_):
                                         self?.presenter?.createItemSuccess()
-                                    case .failure(let error):
-                                        self?.presenter?.createItemFailed(error: error)
+                                    case .failure(_):
+                                        self?.presenter?.createItemFailed()
                                     }
                                     
         })
