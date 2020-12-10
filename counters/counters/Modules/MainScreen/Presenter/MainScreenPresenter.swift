@@ -59,7 +59,7 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     func cleanRowsForDelete() {
         counterListForDelete = []
     }
-    
+
     func sendToActionSheet() {
         let counterText = counterListForDelete.count == 1 ? AppStrings.MainScreen.counter : AppStrings.MainScreen.counters
         let text = String(format: AppStrings.MainScreen.deleteActionSheetText, counterListForDelete.count, counterText)
