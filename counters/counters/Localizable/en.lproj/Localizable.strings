@@ -8,13 +8,13 @@
 
 // Alerts
 "Alert.defaultBody" = "The Internet connection appears to be offline.";
-"Alerts.deleteErrorTitle" = "Couldn’t delete the counter “@”";
-"Alerts.deleteManyErrorTitle" = "Couldn’t delete some counters";
-"Alerts.createErrorTitle" = "Couldn’t create the counter";
-"Alerts.updateErrorTitle" = "Couldn’t update the “%@“ to %d";
+"Alert.deleteErrorTitle" = "Couldn’t delete the counter “@”";
+"Alert.deleteManyErrorTitle" = "Couldn’t delete some counters";
+"Alert.createErrorTitle" = "Couldn’t create the counter";
+"Alert.updateErrorTitle" = "Couldn’t update the “%@“ to %d";
 // Buttons
-"Alerts.dismissOption" = "Dismiss";
-"Alerts.retryOption" = "Dismiss";
+"Alert.dismissOption" = "Dismiss";
+"Alert.retryOption" = "Dismiss";
 
 //WelcomeScreen
 "WelcomeScreen.titlePartOne" = "Welcome to\n";

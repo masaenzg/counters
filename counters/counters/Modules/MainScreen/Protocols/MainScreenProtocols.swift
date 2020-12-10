@@ -27,6 +27,7 @@ protocol MainScreenPresenterProtocol: AnyObject {
     func addCounter(with index: Int)
     func removeCounter(with index: Int)
     func deleteCounters()
+    func cleanRowsForDelete()
     func sendToActionSheet()
     func searchCounter(with text: String)
 }
