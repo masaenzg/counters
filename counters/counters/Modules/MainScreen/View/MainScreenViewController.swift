@@ -155,6 +155,7 @@ final class MainScreenViewController: BaseViewController {
             self.tableView.isEditing = false
             self.setupNavigationBar()
             self.setupToolBar()
+            self.presenter?.cleanRowsForDelete()
         }
     }
     

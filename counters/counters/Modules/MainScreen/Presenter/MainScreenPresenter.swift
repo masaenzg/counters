@@ -56,6 +56,10 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
         }
     }
     
+    func cleanRowsForDelete() {
+        counterListForDelete = []
+    }
+    
     func sendToActionSheet() {
         let counterText = counterListForDelete.count == 1 ? AppStrings.MainScreen.counter : AppStrings.MainScreen.counters
         let text = String(format: AppStrings.MainScreen.deleteActionSheetText, counterListForDelete.count, counterText)
@@ -79,7 +83,7 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
     }
     
     private func filterCounter(with text: String) {
-        counterList = counterList.filter { $0.title.contains(text) }
+        counterList = counterList.filter { $0.title.lowercased().contains(text.lowercased()) }
         view?.resultLabelStatus(with: counterList.count == .zero)
         view?.updateView()
     }
@@ -163,6 +167,7 @@ final class MainScreenPresenter: MainScreenPresenterProtocol {
                                          buttonTitle: AppStrings.MainScreen.alertLoadFailButtonText,
                                          closure: closure)
         view?.showAlerCustomView(with: model)
+        view?.loadedInfo(with: false)
     }
 }
 
